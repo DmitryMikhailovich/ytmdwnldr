@@ -4,6 +4,8 @@ from domain.album import Album
 
 class TrackMapper:
     def map(self, track_meta, album_obj=None):
+        if not track_meta['isAvailable']:
+            return None
         track = Track()
         track.video_id = track_meta.get('videoId') or track.video_id
         track.index = track_meta.get('index') or track.index

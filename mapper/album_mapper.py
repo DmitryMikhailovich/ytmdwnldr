@@ -32,6 +32,8 @@ class AlbumMapper:
         tracks = []
         for index, track_meta in enumerate(album_meta.get('tracks') or [], start=1):
             track = self.track_mapper.map(track_meta, album)
+            if track is None:
+                continue
             track.index = index
             tracks.append(track)
         album.tracks = tracks
