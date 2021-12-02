@@ -7,6 +7,7 @@ class Track:
         self.index = 0
         self.title = None
         self.artist = None
+        self.thumbnail = None
         self.album = Album()
 
     def get_track_file_name(self, ext='mp3'):
@@ -17,7 +18,7 @@ class Track:
 
     @property
     def album_front_cover(self):
-        return self.album.thumbnail
+        return self.album.thumbnail or self.thumbnail
 
     @property
     def comment(self):
