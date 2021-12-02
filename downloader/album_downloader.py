@@ -9,12 +9,12 @@ from tagger.mp3_tagger import MP3Tagger
 
 class AlbumDownloader:
     def __init__(self, file_downloader, path_generator, tagger):
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.file_downloader = file_downloader
         self.path_generator = path_generator
         self.tagger = tagger
 
     def download(self, destination_path, album):
-        logger = logging.getLogger('download_album')
         destination_path = Path(destination_path)
         for track in album.tracks:
             file_path = destination_path.joinpath(self.path_generator.generate_relative_path(track))

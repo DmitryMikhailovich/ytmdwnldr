@@ -21,7 +21,7 @@ def get_ytm(use_auth, headers_path, brand_id):
 
 class YTMDwnldr:
     def __init__(self, destination_path, use_auth, headers_path, brand_id):
-        self.logger = logging.getLogger("ytmdwnldr")
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.destination_path = destination_path
         self.ytm = get_ytm(use_auth, headers_path, brand_id)
 
