@@ -14,5 +14,10 @@ Perform anonymous requests by default.
 
 ### Download album  
 ```shell
-python ytmdwnldr.py [optional args] album {browse_url|album_playlist_url|browse_id|playlist_id}
+python ytmdwnldr.py [optional args] album {browse_url|album_playlist_url|browse_id|playlist_id} [[{browse_url|album_playlist_url|browse_id|playlist_id}] ... ]
+```
+
+### Download playlist
+```shell
+python ytmdwnldr.py [optional args] playlist {playlist_url|playlist_id} [[{playlist_url|playlist_id}] ... ]
 ```
