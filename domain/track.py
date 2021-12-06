@@ -7,7 +7,7 @@ class Track:
         self.index = 0
         self.title = None
         self.artist = None
-        self.thumbnail = None
+        self.thumbnail = b''
         self.album = Album()
 
     def get_track_file_name(self, ext='mp3'):
@@ -26,11 +26,11 @@ class Track:
 
     @property
     def release_year(self):
-        return self.album.year
+        return str(self.album.year)
 
     @property
     def album_title(self):
-        return self.album.title
+        return self.album.title or 'Unknown album'
 
     @property
     def album_artists(self):

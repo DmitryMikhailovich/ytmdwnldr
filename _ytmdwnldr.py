@@ -5,6 +5,7 @@ from pathlib import Path
 from ytmusicapi import YTMusic
 
 from command.album_command import AlbumCommand
+from command.playlist_command import PlaylistCommand
 
 
 def get_ytm(use_auth, headers_path, brand_id):
@@ -31,6 +32,11 @@ class YTMDwnldr:
             for album_id in args.album_id:
                 self.logger.info('Going to download album %s', album_id)
                 command.download(self.destination_path, album_id)
+        elif download_type == 'playlist':
+            command = PlaylistCommand.create(self.ytm)
+            for playlist_id in args.playlist_id:
+                self.logger.info('Going to download playlist %s', playlist_id)
+                command.download(self.destination_path, playlist_id)
         else:
             print('Download type is not specified')
             sys.exit(1)

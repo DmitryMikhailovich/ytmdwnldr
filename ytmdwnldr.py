@@ -18,6 +18,10 @@ def main():
     album_parser.add_argument('album_id', nargs='+',
                               help='URL, playlist ID or browse ID of an album')
 
+    playlist_parser = subparsers.add_parser('playlist', help='Download one or many playlists')
+    playlist_parser.add_argument('playlist_id', nargs='+',
+                                 help='URL or playlist ID of a playlist')
+
     args = parser.parse_args()
     download_type = args.download_type
     destination_path = args.destination_path

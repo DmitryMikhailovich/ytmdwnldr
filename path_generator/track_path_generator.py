@@ -1,9 +1,22 @@
-from pathlib import Path
+import os
+import re
+from abc import ABCMeta, abstractmethod
 
 
-class TrackPathGenerator:
-    def generate_relative_path(self, track, ext='mp3'):
-        album = track.album
-        artist_path = Path(album.get_artists_dir_name())
-        album_path = artist_path.joinpath(album.get_album_dir_name())
-        return album_path.joinpath(track.get_track_file_name(ext=ext))
+class TrackPathGenerator(metaclass=ABCMeta):
+    RE_WIN_REPLACE_WITH_DASH = re.compile(r'[:\\/|]')
+    RE_WIN_REPLACE_WITH_SPACE = re.compile(r'[?*]')
+
+    def escape_path_part(self, path_part: str):
+        if os.name == 'nt':
+            path_part = path_part.replace('<', '(')
+            path_part = path_part.replace('>', ')')
+            path_part = path_part.replace('"', '\'')
+            path_part = self.RE_WIN_REPLACE_WITH_DASH.sub('-', path_part)
+            return self.RE_WIN_REPLACE_WITH_SPACE.sub(' ', path_part)
+        else:
+            return path_part.replace('/', '-')
+
+    @abstractmethod
+    def generate_relative_path(self, collection, track, **kwargs):
+        pass
